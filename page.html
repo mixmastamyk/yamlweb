@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Amazing Title</title>
+        <meta content="value" name="varname">
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <style>
+body {
+    padding: 2em;
+}
+</style>
+        <script src="{{ static_dir }}/scripts/foo.js"></script>
+        <script deferred="deferred">
+// hello world
+</script>
+    </head>
+    <body>
+        <header class="msg bold">
+            <h1 id="main">Profile for {{ username }} II</h1>
+        </header>
+        <div id="byline">Electric Boogaloo…</div>
+        <h3>Friends</h3>
+        <ul class="friends">{% for friend in friends %}
+            <li>
+                <a href="{{ friend.url }}">{{ friend.username }}</a>
+            </li>{% endfor %}
+            </ul>
+        <article>
+            <span class="warning">Warning Text!</span>
+            <br>So this is going to be some text with markup interspersed.
+            <p>{{ post }}</p>
+            <b>How to do that, exactly?</b>
+            <br>
+            <img align="middle" height="180" src="{{ static_dir }}/images/foo.jpg" title="a very nice image" width="240">img is not a container in html, text appears after.
+            <br>
+        </article>
+        <h3>Code Review</h3>
+        <pre>
+// code in here
+def foo(bar, baz):
+    return baz
+</pre>
+        <footer>
+            <div class="footer">Fabulous footer © 2050</div>
+        </footer>
+    </body>
+</html>

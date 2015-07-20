@@ -1,0 +1,52 @@
+
+# a sample yaml file to convert into css.
+
+# no spaces allowed here after first colon, unless quoted
+@media (max-width:600px):
+    .facet_sidebar:
+        display: none
+
+@font-face:
+    font-family: cool_font
+    src: url('cool_font.ttf')
+
+
+*, *:before, *:after:
+    box-sizing: border-box
+
+body:
+    margin: 1em
+    padding: 2em
+    height: 50em
+    # will be converted to hex:
+    color: 221818
+    bg: window              # shortcut for background ;)
+    border: 1px solid 888   # same here
+    border-radius: .5em
+    font-family: "'Open Sans', sans-serif"  # need to escape quotes
+
+# can't use the # char to begin a word without quoting
+body h1#main, h2:
+    border-bottom: 1px dotted 222
+"#main, h2":  # must be quoted
+    color: 264 !important
+
+img:
+    margin: 1em
+    float: right
+
+article > span.warning:
+
+    border: 1px solid orange
+    padding: .1em
+    clear: both
+
+footer:
+    clear: both
+
+# make sure there are no spaces below around the first colon
+.warning:before:
+    # below doesn't strictly need to be quoted,
+    # but want to preserve the trailing space in this instance:
+    content: '⚠ '
+

@@ -1,0 +1,63 @@
+
+# a sample yaml file to convert into html
+
+html lang=en:  # optional, perhaps you'd like to set some attrs
+
+    head:
+        title: Amazing Title
+        meta varname=value:
+        link rel=stylesheet href=style.css type=text/css media=screen:
+        link rel=stylesheet href="http://fonts.googleapis.com/css?family=Open+Sans" type=text/css:
+        style:
+            body:
+                padding: 2em
+        script src="{{ static_dir }}/scripts/foo.js":
+        script deferred: |  # this pipe char keeps formatting in yaml
+
+            // hello world
+
+    body:
+
+        header class="msg bold":
+            h1#main:
+                Profile for {{ username }} II
+
+        "#byline":  # becomes div#...
+            Electric Boogaloo…
+
+        h3: Friends
+
+        ul.friends:  # Django/Jinja templating possible
+            - {% for friend in friends %}
+            - li:
+                a href="{{ friend.url }}":
+                    {{ friend.username }}
+            - {% endfor %}
+
+        article:
+                - span class=warning:
+                    Warning Text!
+                - br:
+                - So this is going to be some text with markup interspersed.
+                - p:
+                    {{ post }}
+                - b:
+                    How to do that, exactly?
+                - br:
+                - ? # complex key, allows one to split line into several...
+                    img src="{{ static_dir }}/images/foo.jpg"
+                    title="a very nice image"
+                    height=180 width=240 align=middle  # tsk, tsk but possible
+                  : img is not a container in html, text appears after.
+                - br:
+
+        h3: Code Review  # Can handle duplicate keys unlike normal yaml ;)
+        pre: |
+
+            // code in here
+            def foo(bar, baz):
+                return baz
+
+        footer:   # becomes div
+
+            .footer: Fabulous footer © 2050
