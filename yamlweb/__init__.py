@@ -1,4 +1,5 @@
 
+__progname = 'yamlweb'
 __version__ = '0.50'
 
 

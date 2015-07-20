@@ -5,8 +5,9 @@ YamlWeb
 Web development is hard. You have to learn at least three languages to create
 things that take just one on other platforms.
 
-If I could get in a time machine and go back to the dawn of the web I'd
-probably try to implement something like a subset of YAML instead, perhaps
+If I could get in a time machine and go back to the dawn of the web
+(and not completely reinvent everything)
+I'd probably try to implement something like a subset of YAML instead, perhaps
 with Python for scripting. (I might also like to separate documents from
 applications but that is a subject for another day.)
 
@@ -19,7 +20,7 @@ converts them to the real thing!  This is similar to Haml & SASS/but without a
 custom language and ruby dependency.
 
 I thought about implementing a yaml version of javascript at some point but
-there is large mismatch to overcome.
+there is obviously a large mismatch to overcome.
 Nice things like coffeescript, typescript, pyjs, and brython already exist.
 I recommend those as companions, see
 https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js
@@ -32,7 +33,7 @@ Issues
 There are still a few awkward issues to address in the conversion,
 though I've already squashed the majority.
 I've had to deactivate a few of the features of YAML/PyYAML since there are
-just too many.  For example flow syntax.
+so many.  For example flow syntax.
 
 There are still a few places where the # character has to be quoted in CSS,
 for example as a remaining problem.
@@ -46,7 +47,7 @@ edge-cases.
 html in yaml
 --------------
 
-::
+Let's get to it shall we?  This is what it looks like::
 
     html lang=en:  # optional, perhaps you'd like to set some attrs
 
@@ -181,7 +182,16 @@ Install
 Should work under Python 2.x and 3.x.
 
 ::
-    sudo pip install yamlweb  # may not be available yet
+
+    # download, unpack, run setup.py
+    cd folder
+    setup.py install   # might need sudo
+
+or
+
+This is not available yet, but will be if popular::
+
+    sudo pip install yamlweb
 
 
 
@@ -189,9 +199,13 @@ Use
 ------------
 
 ::
+
     yaml2html page.yaml -O -i 4  # outputs to page.html and indents 4 spaces
 
     yaml2css style.yaml -O -i 4  # outputs to style.css and indents 4 spaces
+
+    # or from stdin
+    cat page.yaml | yaml2html > page.html
 
 
 License
