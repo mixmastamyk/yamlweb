@@ -221,7 +221,7 @@ Should work under Python 2.x and 3.x.
 
 or
 
-This is not available yet, but will be if popular::
+This is not available yet, but will be if requests are made::
 
     sudo pip install yamlweb
 
