@@ -207,6 +207,8 @@ Will convert to this::
     }
     ...
 
+Still need to implement variables for CSS but it should be easy.
+
 
 Install
 ------------
