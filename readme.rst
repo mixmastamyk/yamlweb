@@ -13,7 +13,7 @@ applications but that is a subject for another day.)
 
 "Transpilers" and new languages are all the rage these days,
 so what's one more??
-This is an /experiment/ to see if YAML is usable for web markup and styles.
+This is an *experiment* to see if YAML is usable for web markup and styles.
 
 The included scripts convert YAML that looks like bare HTML or CSS and
 converts them to the real thing!  This is similar to Haml & SASS/but without a
@@ -33,10 +33,8 @@ Issues
 
 There are still a few awkward issues to address in the conversion,
 though I've already squashed the majority.
-
-I've had to deactivate a few of the features of YAML/PyYAML
-since there are many,
-for example flow syntax.
+For example, I've had to deactivate a few of the features of YAML/PyYAML such
+as flow syntax.
 Another remaining problem,
 is that the "#" character has to be quoted if it starts a line css selectors.
 
