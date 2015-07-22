@@ -13,15 +13,16 @@ applications but that is a subject for another day.)
 
 "Transpilers" and new languages are all the rage these days,
 so what's one more??
-This is an experiment to see if YAMl is usable for web markup and styles.
+This is an /experiment/ to see if YAML is usable for web markup and styles.
 
 The included scripts convert YAML that looks like bare HTML or CSS and
 converts them to the real thing!  This is similar to Haml & SASS/but without a
 custom language and ruby dependency.
 
-I thought about implementing a yaml version of javascript at some point but
+Also thought about implementing a yaml version of javascript at some point but
 there is obviously a large mismatch to overcome.
-Nice things like coffeescript, typescript, pyjs, and brython already exist.
+Nice things like coffeescript, typescript, pyjs, and brython already exist,
+however.
 I recommend those as companions, see
 https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js
 for a nice list.
@@ -32,15 +33,16 @@ Issues
 
 There are still a few awkward issues to address in the conversion,
 though I've already squashed the majority.
-I've had to deactivate a few of the features of YAML/PyYAML since there are
-so many.  For example flow syntax.
 
-There are still a few places where the # character has to be quoted in CSS,
-for example as a remaining problem.
+I've had to deactivate a few of the features of YAML/PyYAML
+since there are many,
+for example flow syntax.
+Another remaining problem,
+is that the "#" character has to be quoted if it starts a line css selectors.
 
-I'm hoping to solve those left by overriding classes in PyYAML and ElementTree,
-but if it doesn't work and this becomes popular,
-I suppose a custom parser would allow a conversion with zero annoyances or
+I'm hoping to solve those by overriding classes in PyYAML and ElementTree,
+but if it doesn't work or is too difficult,
+a custom parser should allow a conversion with zero annoyances or
 edge-cases.
 
 
@@ -53,7 +55,7 @@ Let's get to it shall we?  This is what it looks like::
 
         head:
             title: Amazing Title
-            meta varname=value:
+            meta varname=value:     # this will be changed to std form
             link rel=stylesheet href=style.css type=text/css media=screen:
             link rel=stylesheet href="http://fonts.googleapis.com/css?family=Open+Sans":
             style:  # same syntax
@@ -99,6 +101,38 @@ Will convert to this::
 
         ...
 
+One issue I'm still thinking about is what to do with "inline" markup.
+What I mean by this is,
+it is easy enough to model the block/container tags with
+yaml maps (dict/hash/assoc arrays).
+But, what happens when you you'd like a run of html with/without containers::
+
+    This text represents a blog post.<br> Line two is here.<img src=...><br>
+    <span class="highlight">Line three.</span><br>
+
+For now I've decided to use a list of text fragments
+(with maps for tags, containers or not)::
+
+    article:
+            - span class=warning:
+                Warning Text!
+            - br:
+            - So this is going to be some text with markup interspersed.
+            - p:
+                {{ post }}
+            - b:
+                How to do that, exactly?
+            - br:
+            - ? # complex key, allows one to split line into several...
+                img src="{{ static_dir }}/images/foo.jpg"
+                title="a very nice image"
+                height=180 width=240 align=middle  # tsk, tsk but possible
+              : img is not a container in html, text appears after.
+            - br:
+
+If there is a better way to do this I'd like to hear it,
+pls file an enhancement issue.
+
 
 css in yaml
 ------------
@@ -128,10 +162,10 @@ While::
         border-radius: .5em
         font-family: "'Open Sans', sans-serif"  # need to escape quotes
 
-    # can't use the # char to begin a word without quoting
+    # "#" char can be used inside a word, but not begin a word
     body h1#main, h2:
         border-bottom: 1px dotted 222
-    "#main, h2":  # must be quoted
+    "#main, h2":  # this form must be quoted
         color: 264 !important
 
     ...
@@ -206,6 +240,12 @@ Use
 
     # or from stdin
     cat page.yaml | yaml2html > page.html
+
+
+Todo
+------------
+
+- Add markdown and/or rst support.
 
 
 License
