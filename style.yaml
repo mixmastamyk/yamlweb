@@ -1,7 +1,7 @@
 
 # a sample yaml file to convert into css.
 
-# no spaces allowed here after first colon, unless quoted
+# no spaces allowed here after first colon, unless quoted:
 @media (max-width:600px):
     .facet_sidebar:
         display: none
@@ -25,7 +25,7 @@ body:
     border-radius: .5em
     font-family: "'Open Sans', sans-serif"  # need to escape quotes
 
-# can't use the # char to begin a word without quoting
+# "#" char can be used inside a word, but not begin a word without quoting
 body h1#main, h2:
     border-bottom: 1px dotted 222
 "#main, h2":  # must be quoted

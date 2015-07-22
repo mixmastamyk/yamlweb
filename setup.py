@@ -16,12 +16,12 @@ except IOError:
 setup(
     name              = name,
     version           = __version__,
-    description       = ( 'Converts YAML to HTML and CSS.'),
+    description       = 'Converts YAML to HTML and CSS.',
     author            = 'Mike Miller',
     author_email      = 'mixmastamyk@github.com',
     url               = 'https://github.com/mixmastamyk/%s' % name,
-    #~ download_url      = 'https://github.com/mixmastamyk/%s/get/' +
-                        #~ 'default.tar.gz' % name,
+    download_url      = ('https://github.com/mixmastamyk/%s/archive/master.zip'
+                         % name),
     license           = 'GPLv3+',
     requires          = ['PyYAML(>=3.10,<4.0)', ], #+ requires, # for pypi page
     install_requires  = ['PyYAML>=3.10,<4.0a0', ], #+ requires,  # real reqs
