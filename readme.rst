@@ -3,7 +3,7 @@ YamlWeb
 ==============
 
 Web development is hard. You have to learn at least three languages to create
-things that take just one on other platforms.
+an application that would take one on other platforms.
 
 If I could get in a time machine and go back to the dawn of the web
 (and not completely reinvent everything)
@@ -34,9 +34,10 @@ Issues
 There are still a few awkward issues to address in the conversion,
 though I've already squashed the majority.
 For example, I've had to deactivate a few of the features of YAML/PyYAML such
-as flow syntax.
-Another remaining problem,
-is that the "#" character has to be quoted if it starts a line css selectors.
+as flow syntax and tags.
+One remaining problem,
+is that the "#" character has to be quoted if it starts a line in a css
+selector.
 
 I'm hoping to solve those by overriding classes in PyYAML and ElementTree,
 but if it doesn't work or is too difficult,
@@ -47,16 +48,21 @@ edge-cases.
 html in yaml
 --------------
 
-Let's get to it shall we?  This is what it looks like::
+Let's get to it shall we?
+This is what a page looks like,
+colons start block elements,
+attributes are given just after the "tag" name.
+
+.. code:: yaml
 
     html lang=en:  # optional, perhaps you'd like to set some attrs
 
         head:
             title: Amazing Title
-            meta varname=value:     # this will be changed to std form
+            meta varname=value:     # note - this will be changed to std form
             link rel=stylesheet href=style.css type=text/css media=screen:
             link rel=stylesheet href="http://fonts.googleapis.com/css?family=Open+Sans":
-            style:  # same syntax
+            style:  # same syntax for styles:
                 body:
                     padding: 2em
 
@@ -72,7 +78,9 @@ Let's get to it shall we?  This is what it looks like::
                     Profile for {{ username }}
         ...
 
-Will convert to this::
+Will convert to this HTML:
+
+.. code:: html
 
     <!DOCTYPE html>
     <html lang="en">
@@ -101,15 +109,18 @@ Will convert to this::
 
 One issue I'm still thinking about is what to do with "inline" markup.
 What I mean by this is,
-it is easy enough to model the block/container tags with
-yaml maps (dict/hash/assoc arrays).
-But, what happens when you you'd like a run of html with/without containers::
+it is easy enough to model the block tags with yaml maps
+(aka dict/hash/assoc arrays).
+But, what happens when you you'd like a run of html with/without block
+containers::
 
     This text represents a blog post.<br> Line two is here.<img src=...><br>
     <span class="highlight">Line three.</span><br>
 
 For now I've decided to use a list of text fragments
-(with maps for tags, containers or not)::
+(with maps when tags are needed, note the trailing colons):
+
+.. code:: yaml
 
     article:
             - span class=warning:
@@ -121,11 +132,12 @@ For now I've decided to use a list of text fragments
             - b:
                 How to do that, exactly?
             - br:
-            - ? # complex key, allows one to split line into several...
+            # below a complex key, allows one to split a long line into several
+            - ?
                 img src="{{ static_dir }}/images/foo.jpg"
                 title="a very nice image"
                 height=180 width=240 align=middle  # tsk, tsk but possible
-              : img is not a container in html, text appears after.
+              : img is not a container in html, so text appears after.
             - br:
 
 If there is a better way to do this I'd like to hear it,
@@ -135,7 +147,9 @@ pls file an enhancement issue.
 css in yaml
 ------------
 
-While::
+While:
+
+.. code:: yaml
 
     @media (max-width:600px):
         .facet_sidebar:
@@ -168,7 +182,9 @@ While::
 
     ...
 
-Will convert to this::
+Will convert to this:
+
+.. code:: css
 
     @charset: "utf-8";
 
@@ -232,7 +248,7 @@ This is not available yet, but will be if requests are made::
 Use
 ------------
 
-::
+.. code:: bash
 
     yaml2html page.yaml -O -i 4  # outputs to page.html and indents 4 spaces
 
