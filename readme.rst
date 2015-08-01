@@ -259,9 +259,9 @@ Use
 
 .. code:: bash
 
-    yaml2html page.yaml -O -i 4  # outputs to page.html and indents 4 spaces
+    yaml2html page.yaml -O -i 4  # outputs to page.html, indents 4 spaces
 
-    yaml2css style.yaml -O -i 4  # outputs to style.css and indents 4 spaces
+    yaml2css style.yaml -O -i 4  # outputs to style.css, indents 4 spaces
 
     # or from stdin
     cat page.yaml | yaml2html > page.html
