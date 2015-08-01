@@ -7,7 +7,9 @@ an application that would take one on other platforms.
 
 If I could get in a time machine and go back to the dawn of the web
 (and not try to reinvent everything)
-I'd probably try to implement something like a subset of YAML instead, perhaps
+I'd probably try to implement something like a subset of
+`YAML <http://www.yaml.org/spec/1.2/spec.html#Introduction>`_
+instead, perhaps
 with Python for scripting. (I might also like to separate documents from
 applications but that is a subject for another day.)
 
@@ -51,7 +53,8 @@ html in yaml
 Let's get to it shall we?
 This is what a page looks like,
 mapping keys ending in colons start block elements,
-with attributes given just after the "tag" name.
+with attributes given just after the "tag" name but before the end of the
+key.
 
 .. code:: yaml
 
@@ -59,7 +62,7 @@ with attributes given just after the "tag" name.
 
         head:
             title: Amazing Title
-            meta varname=value:     # note - this will be changed to std form
+            meta varname=value:  # note, this will be changed to std form
             link rel=stylesheet href=style.css type=text/css media=screen:
             link rel=stylesheet href="http://fonts.googleapis.com/css?family=Open+Sans":
             style:  # same syntax for styles:
@@ -101,7 +104,7 @@ Which will convert to this HTML:
             </script>
         </head>
         <body>
-            <header class="msg bold">
+            <header class="one two">
                 <h1 id="main">Profile for {{ username }} II</h1>
             </header>
 
@@ -153,7 +156,7 @@ While:
 
 .. code:: yaml
 
-    vars:                # how to use variables
+    vars:                # how to define variables
         bgcolor: window  # system colors
         fgcolor: 221818
 
