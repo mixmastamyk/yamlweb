@@ -68,7 +68,7 @@ def parse_key(key):
 
     log.debug('attrs: %r', attrs)
     attrs = [ attr.partition('=')[::2] for attr in shplit(attrs) ]
-    # fix boolean attrs  :/
+    # fix boolean attrs for elementtree  :/
     attrs = sorted([ (attr[0], attr[1] or attr[0]) for attr in attrs ])
 
     return tag, attrs
@@ -144,25 +144,32 @@ def main(args):
     import yaml
     from .utils import SafeOrdLoader, get_output_filename
     from .css import convert_to_css
-    global convert_to_css  # :/ defer loading
+    global convert_to_css  # :/
 
-    status = os.EX_OK
     for infile in args.infile:
         log.info('reading "%s"', infile.name)
         with infile:
-            data = yaml.load(infile, SafeOrdLoader)
-            log.debug(pformat(data))
+            try:
+                data = yaml.load(infile, SafeOrdLoader)
+                log.debug(pformat(data))
+            except yaml.YAMLError as err:
+                log.critical('unable to continue: %s', err)
+                return os.EX_DATAERR
 
+        log.info('converting...')
         html = convert_to_html(data, indent=args.indent,
                                encoding=args.encoding)
-
-        outfile = ( open(get_output_filename(infile), 'wb')
-                    if args.to_html else args.output )
-        log.info('writing "%s"', outfile.name)
-        with outfile:
-            if args.doctype:
-                outfile.write((args.doctype + '\n').encode(args.encoding)) #py3
-            outfile.write(html)
+        try:
+            outfile = ( open(get_output_filename(infile), 'wb')
+                        if args.to_html else args.output )
+            log.info('writing "%s"', outfile.name)
+            with outfile:
+                if args.doctype:
+                    outfile.write((args.doctype + '\n').encode(args.encoding)) #py3
+                outfile.write(html)
+        except IOError as err:
+            log.critical('unable to write file: %s', err)
+            return os.EX_CANTCREAT
 
     log.info('done.')
-    return status
+    return os.EX_OK
