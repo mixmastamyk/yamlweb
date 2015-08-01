@@ -134,7 +134,7 @@ For now I've decided to use a list of text fragments
             - b:
                 How to do that, exactly?
             - br:
-            # below a complex key, allows one to split a long line into several
+            # below a complex key, allows one to split up a long line:
             - ?
                 img src="{{ static_dir }}/images/foo.jpg"
                 title="a very nice image"
@@ -167,7 +167,6 @@ While:
         font-family: cool_font
         src: url('cool_font.ttf')
 
-
     *, *:before, *:after:
         box-sizing: border-box
 
@@ -177,7 +176,7 @@ While:
         height: 50em
         # nums of 3,6 chars will be converted to hex:
         color: {fgcolor}
-        # bg is shortcut for background, bgcolor is a variable defined above:
+        # bg is shortcut for background, bgcolor is a var defined above:
         bg: {bgcolor}
         border: 1px solid 888   # same here
         border-radius: .5em

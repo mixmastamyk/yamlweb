@@ -44,7 +44,7 @@ html lang=en:  # optional, perhaps you'd like to set lang
                 - b:
                     How to do that, exactly?
                 - br:
-                # below a complex key, allows one to split a long line
+                # below a complex key, allows one to split up a long line:
                 - ?
                     img src="{{ static_dir }}/images/foo.jpg"
                     title="a very nice image"

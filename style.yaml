@@ -23,13 +23,13 @@ body:
     height: 50em
     # nums of 3,6 chars will be converted to hex:
     color: {fgcolor}
-    # bg is shortcut for background, bgcolor is a variable defined above:
+    # bg is shortcut for background, bgcolor is a var defined above:
     bg: {bgcolor}
     border: 1px solid 888   # same here
     border-radius: .5em
     font-family: "'Open Sans', sans-serif"  # need to escape quotes
 
-# "#" char can be used inside a word, but not begin a word without quoting
+# "#" char can be used inside a word, but not begin a word w/o quoting
 body h1#main, h2:
     border-bottom: 1px dotted {fgcolor}
 "#main, h2":  # must be quoted :/
