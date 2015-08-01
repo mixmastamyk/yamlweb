@@ -1,7 +1,11 @@
 
 # a sample yaml file to convert into css.
+vars:
+    bgcolor: window  # system colors
+    fgcolor: 221818
 
-# no spaces allowed here after first colon, unless quoted:
+
+# no spaces allowed after first colon, unless quoted:
 @media (max-width:600px):
     .facet_sidebar:
         display: none
@@ -19,16 +23,17 @@ body:
     padding: 2em
     height: 50em
     # will be converted to hex:
-    color: 221818
-    bg: window              # shortcut for background ;)
+    color: {fgcolor}
+    # bg is shortcut for background, bgcolor is a variable defined above:
+    bg: {bgcolor}
     border: 1px solid 888   # same here
     border-radius: .5em
     font-family: "'Open Sans', sans-serif"  # need to escape quotes
 
 # "#" char can be used inside a word, but not begin a word without quoting
 body h1#main, h2:
-    border-bottom: 1px dotted 222
-"#main, h2":  # must be quoted
+    border-bottom: 1px dotted {fgcolor}
+"#main, h2":  # must be quoted :/
     color: 264 !important
 
 img:
@@ -44,9 +49,9 @@ article > span.warning:
 footer:
     clear: both
 
-# make sure there are no spaces below around the first colon
+# make sure there are no spaces below around the first colon, or quote
 .warning:before:
-    # below doesn't strictly need to be quoted,
+    # content below doesn't strictly need to be quoted,
     # but want to preserve the trailing space in this instance:
     content: '⚠ '
 

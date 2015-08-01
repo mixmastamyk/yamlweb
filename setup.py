@@ -28,10 +28,10 @@ setup(
 
     packages          = [name],
     scripts           = ['yaml2html', 'yaml2css'],
-    #~ package_data      = {name: ['', '']},
 
+    #~ package_data      = {name: ['', '']},
     #~ extras_require = {
-        #~ 'win': ['colorama', 'fcrypt'],
+        #~ 'name': ['pkg1', 'pkg2'],
     #~ },
 
     long_description  = long_description,
@@ -39,7 +39,8 @@ setup(
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'License :: OSI Approved :: GNU General Public License v3'
+            ' or later (GPLv3+)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Utilities',
