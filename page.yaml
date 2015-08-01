@@ -1,7 +1,7 @@
 
 # a sample yaml file to convert into html
 
-html lang=en:  # optional, perhaps you'd like to set some attrs
+html lang=en:  # optional, perhaps you'd like to set lang
 
     head:
         title: Amazing Title

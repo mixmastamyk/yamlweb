@@ -4,7 +4,6 @@ vars:
     bgcolor: window  # system colors
     fgcolor: 221818
 
-
 # no spaces allowed after first colon, unless quoted:
 @media (max-width:600px):
     .facet_sidebar:
@@ -22,7 +21,7 @@ body:
     margin: 1em
     padding: 2em
     height: 50em
-    # will be converted to hex:
+    # nums of 3,6 chars will be converted to hex:
     color: {fgcolor}
     # bg is shortcut for background, bgcolor is a variable defined above:
     bg: {bgcolor}

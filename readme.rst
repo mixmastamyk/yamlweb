@@ -6,7 +6,7 @@ Web development is hard. You have to learn at least three languages to create
 an application that would take one on other platforms.
 
 If I could get in a time machine and go back to the dawn of the web
-(and not completely reinvent everything)
+(and not try to reinvent everything)
 I'd probably try to implement something like a subset of YAML instead, perhaps
 with Python for scripting. (I might also like to separate documents from
 applications but that is a subject for another day.)
@@ -19,8 +19,8 @@ The included scripts convert YAML that looks like bare HTML or CSS and
 converts them to the real thing!  This is similar to Haml & SASS/but without a
 custom language and ruby dependency.
 
-Also thought about implementing a yaml version of javascript at some point but
-there is obviously a large mismatch to overcome.
+Also thought about implementing a "yaml version of javascript" at some point
+but there is obviously a large mismatch to overcome.
 Nice things like coffeescript, typescript, pyjs, and brython already exist,
 however.
 I recommend those as companions, see
@@ -34,7 +34,7 @@ Issues
 There are still a few awkward issues to address in the conversion,
 though I've already squashed the majority.
 For example, I've had to deactivate a few of the features of YAML/PyYAML such
-as flow syntax and tags.
+as flow syntax and directives.
 One remaining problem,
 is that the "#" character has to be quoted if it starts a line in a css
 selector.
@@ -50,12 +50,12 @@ html in yaml
 
 Let's get to it shall we?
 This is what a page looks like,
-colons start block elements,
-attributes are given just after the "tag" name.
+mapping keys ending in colons start block elements,
+with attributes given just after the "tag" name.
 
 .. code:: yaml
 
-    html lang=en:  # optional, perhaps you'd like to set some attrs
+    html lang=en:  # optional, perhaps you'd like to set lang
 
         head:
             title: Amazing Title
@@ -66,7 +66,7 @@ attributes are given just after the "tag" name.
                 body:
                     padding: 2em
 
-            # accepts templating syntax:
+            # accepts common templating syntax:
             script src="{{ static_dir }}/scripts/foo.js":
             script deferred: |  # this pipe char keeps formatting in yaml
 
@@ -78,7 +78,7 @@ attributes are given just after the "tag" name.
                     Profile for {{ username }}
         ...
 
-Will convert to this HTML:
+Which will convert to this HTML:
 
 .. code:: html
 
@@ -109,16 +109,18 @@ Will convert to this HTML:
 
 One issue I'm still thinking about is what to do with "inline" markup.
 What I mean by this is,
-it is easy enough to model the block tags with yaml maps
+it's easy enough to model the block tags with yaml maps
 (aka dict/hash/assoc arrays).
 But, what happens when you you'd like a run of html with/without block
-containers::
+containers?
+
+.. code:: html
 
     This text represents a blog post.<br> Line two is here.<img src=...><br>
     <span class="highlight">Line three.</span><br>
 
 For now I've decided to use a list of text fragments
-(with maps when tags are needed, note the trailing colons):
+(with mapping keys when tags are needed, note the trailing colons):
 
 .. code:: yaml
 
@@ -151,6 +153,12 @@ While:
 
 .. code:: yaml
 
+    vars:                # how to use variables
+        bgcolor: window  # system colors
+        fgcolor: 221818
+
+    # the first colon below may not have whitespace after it,
+    # or must be quoted
     @media (max-width:600px):
         .facet_sidebar:
             display: none
@@ -167,9 +175,10 @@ While:
         margin: 1em
         padding: 2em
         height: 50em
-        # will be converted to hex:
-        color: 221818
-        bg: window              # shortcut for background
+        # nums of 3,6 chars will be converted to hex:
+        color: {fgcolor}
+        # bg is shortcut for background, bgcolor is a variable defined above:
+        bg: {bgcolor}
         border: 1px solid 888   # same here
         border-radius: .5em
         font-family: "'Open Sans', sans-serif"  # need to escape quotes
@@ -223,7 +232,7 @@ Will convert to this:
     }
     ...
 
-Still need to implement variables for CSS but it should be easy.
+Still need to implement prefixing for CSS but it should be easy.
 
 
 Install
@@ -231,7 +240,7 @@ Install
 
 Should work under Python 2.x and 3.x.
 
-::
+.. code:: bash
 
     # download, unpack, run setup.py
     cd folder
@@ -239,7 +248,7 @@ Should work under Python 2.x and 3.x.
 
 or
 
-This is not available yet, but will be if requests are made::
+This is not available yet, but will be if a few requests are made::
 
     sudo pip install yamlweb
 
@@ -262,6 +271,7 @@ Todo
 ------------
 
 - Add markdown and/or rst support.
+- Sort CSS rules, not selectors.
 
 
 License
