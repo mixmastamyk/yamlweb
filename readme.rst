@@ -3,7 +3,7 @@ YamlWeb
 ==============
 
 Web development is hard. You have to learn at least three languages to create
-an application that would take one on other platforms.
+an application that might take one on other platforms.
 
 If I could get in a time machine and go back to the dawn of the web
 (and not try to reinvent everything)
@@ -53,8 +53,8 @@ html in yaml
 Let's get to it shall we?
 This is what a page looks like,
 mapping keys ending in colons start block elements,
-with attributes given just after the "tag" name but before the end of the
-key.
+aka "tags",
+with attributes given just afterward but before the end of the key.
 
 .. code:: yaml
 
